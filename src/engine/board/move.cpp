@@ -117,6 +117,18 @@ bool Board::isValidMove(const Move& move) const {
 		}
 		break;
 	}
+
+	case PieceType::King: {
+		int deltaX = dist(move.fromX, move.toX);
+		int deltaY = dist(move.fromY, move.toY);
+
+		bool moveRange = (deltaX <= 1 && deltaY <= 1);
+
+		if (moveRange) {
+			return target == nullptr || notSameColor;
+		}
+		break;
+	}
 	}
 
 	return false;
