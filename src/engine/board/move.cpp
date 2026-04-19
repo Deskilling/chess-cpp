@@ -58,6 +58,18 @@ bool Board::isValidMove(const Move& move) const {
 		}
 		break;
 	}
+
+	case PieceType::Knight: {
+		int deltaX = dist(move.fromX, move.toX);
+		int deltaY = dist(move.fromY, move.toY);
+
+		bool lShape = ((deltaX == 2 && deltaY == 1) || (deltaX == 1 && deltaY == 2));
+
+		if (lShape) {
+			return target == nullptr || notSameColor;
+		}
+		break;
+	}
 	}
 
 	return false;
