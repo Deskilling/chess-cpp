@@ -1,0 +1,23 @@
+BasedOnStyle: LLVM
+IndentWidth: 4
+TabWidth: 4
+UseTab: ForIndentation
+
+BreakBeforeBraces: Attach
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: true
+AllowShortLoopsOnASingleLine: true
+
+ColumnLimit: 140
+
+PointerAlignment: Left
+AlignAfterOpenBracket: Align
+SpaceBeforeParens: ControlStatements
+
+SortIncludes: false
+ReferenceAlignment: Left
+SpacesInAngles: Never
+BreakConstructorInitializers: BeforeColon
+PackConstructorInitializers: Never
+AlwaysBreakTemplateDeclarations: Yes
+EmptyLineBeforeAccessModifier: LogicalBlock
