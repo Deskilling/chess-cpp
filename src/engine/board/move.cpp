@@ -7,6 +7,10 @@ bool Board::isValidMove(const Move& move) const {
 		return false;
 	}
 
+	if ((move.fromX == move.toX) && (move.fromY == move.toY)) {
+		return false;
+	}
+
 	Piece* target = tiles[move.toX][move.toY];
 	bool notSameColor = target != nullptr && piece->getColor() != target->getColor();
 
@@ -28,6 +32,29 @@ bool Board::isValidMove(const Move& move) const {
 
 		if (forwardOne || capture || forwardTwo) {
 			return true;
+		}
+		break;
+	}
+
+	case PieceType::Rook: {
+		int deltaX = dist(move.fromX, move.toX);
+		int deltaY = dist(move.fromY, move.toY);
+		int steps = deltaX + deltaY;
+
+		bool moveRank = (deltaX != 0 && deltaY == 0);
+		bool moveFile = (deltaX == 0 && deltaY != 0);
+
+		int moveX = (moveRank) ? (move.toX > move.fromX ? 1 : -1) : 0;
+		int moveY = (moveFile) ? (move.toY > move.fromY ? 1 : -1) : 0;
+
+		if (moveFile || moveRank) {
+			for (int i = 1; i < steps; i++) {
+				if (tiles[move.fromX + i * moveX][move.fromY + i * moveY] != nullptr) {
+					return false;
+				}
+			}
+
+			return target == nullptr || notSameColor;
 		}
 		break;
 	}
