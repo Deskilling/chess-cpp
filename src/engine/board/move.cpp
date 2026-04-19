@@ -92,6 +92,31 @@ bool Board::isValidMove(const Move& move) const {
 		}
 		break;
 	}
+
+	case PieceType::Queen: {
+		int deltaX = dist(move.fromX, move.toX);
+		int deltaY = dist(move.fromY, move.toY);
+
+		bool moveDiagonal = (deltaX == deltaY);
+		bool moveRank = (deltaX != 0 && deltaY == 0);
+		bool moveFile = (deltaX == 0 && deltaY != 0);
+
+		int steps = (moveDiagonal) ? deltaX : deltaX + deltaY;
+
+		int moveX = (deltaX == 0) ? 0 : (move.toX > move.fromX ? 1 : -1);
+		int moveY = (deltaY == 0) ? 0 : (move.toY > move.fromY ? 1 : -1);
+
+		if (moveDiagonal || moveRank || moveFile) {
+			for (int i = 1; i < steps; i++) {
+				if (tiles[move.fromX + i * moveX][move.fromY + i * moveY] != nullptr) {
+					return false;
+				}
+			}
+
+			return target == nullptr || notSameColor;
+		}
+		break;
+	}
 	}
 
 	return false;
