@@ -70,6 +70,28 @@ bool Board::isValidMove(const Move& move) const {
 		}
 		break;
 	}
+
+	case PieceType::Bishop: {
+		int deltaX = dist(move.fromX, move.toX);
+		int deltaY = dist(move.fromY, move.toY);
+		int steps = deltaX;
+
+		bool moveDiagonal = (deltaX == deltaY);
+
+		int moveX = (move.toX > move.fromX) ? 1 : -1;
+		int moveY = (move.toY > move.fromY) ? 1 : -1;
+
+		if (moveDiagonal) {
+			for (int i = 1; i < steps; i++) {
+				if (tiles[move.fromX + i * moveX][move.fromY + i * moveY] != nullptr) {
+					return false;
+				}
+			}
+
+			return target == nullptr || notSameColor;
+		}
+		break;
+	}
 	}
 
 	return false;
