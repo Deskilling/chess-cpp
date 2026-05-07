@@ -2,4 +2,8 @@
 
 int main() {
 	Board board;
+
+	board.initDefault();
+
+	board.print();
 }

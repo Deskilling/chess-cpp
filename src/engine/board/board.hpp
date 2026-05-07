@@ -2,7 +2,6 @@
 #define BOARD_HPP
 
 #include <string>
-
 #include "../piece/piece.hpp"
 
 struct Move {
@@ -10,10 +9,17 @@ struct Move {
 	int toX, toY;
 };
 
+struct Player {
+	bool canKingSideCastle;
+	bool canQueenSideCastle;
+};
+
 class Board {
   private:
 	Piece* tiles[8][8];
 	Color currentTurn;
+	Player Black;
+	Player White;
 
   public:
 	Board();

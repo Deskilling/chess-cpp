@@ -8,6 +8,11 @@ Board::Board() {
 			tiles[x][y] = nullptr;
 		}
 	}
+
+	currentTurn = Color::White;
+
+	Black = {false, false};
+	White = {false, false};
 }
 
 Board::~Board() {
